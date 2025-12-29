@@ -10,7 +10,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: '블루점프 4기 오디션 모아보기',
-  description: '블루점프 4기 오디션 합격자 모아보기 팬 사이트입니다. (비공식)',
+  description: '블루점프 4기 오디션 합격자 모아보기 팬 사이트입니다.',
 };
 
 const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {

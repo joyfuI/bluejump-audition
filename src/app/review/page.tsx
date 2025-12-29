@@ -3,9 +3,10 @@ import { Alert, Flex } from 'antd';
 import type { GetVodsReviewResponse } from '@/api/getVodsReview';
 import getVodsReview from '@/api/getVodsReview';
 import ClientLayout from '@/components/ClientLayout';
-import VodCard from '@/components/VodCard';
 import { STREAMER_LIST } from '@/constants';
 import dayjs from '@/lib/dayjs';
+
+import VodCard from './VodCard';
 
 const Home = async () => {
   const vodsReviewListPromise = STREAMER_LIST.map((item) =>

@@ -3,9 +3,10 @@ import { Flex } from 'antd';
 import getHomeBroad from '@/api/getHomeBroad';
 import getStationInfo from '@/api/getStationInfo';
 import ClientLayout from '@/components/ClientLayout';
-import LiveCard from '@/components/LiveCard';
 import { STREAMER_LIST } from '@/constants';
 import dayjs from '@/lib/dayjs';
+
+import LiveCard from './LiveCard';
 
 const Home = async () => {
   const stationInfoListPromise = STREAMER_LIST.map(

@@ -4,9 +4,10 @@ import { createLoader, parseAsString } from 'nuqs/server';
 
 import type { GetCalendarResponse } from '@/api/getCalendar';
 import getCalendar from '@/api/getCalendar';
-import ClientCalendar from '@/components/ClientCalendar';
 import ClientLayout from '@/components/ClientLayout';
 import { STREAMER_LIST } from '@/constants';
+
+import ClientCalendar from './ClientCalendar';
 
 export type PageProps = { searchParams: Promise<SearchParams> };
 
