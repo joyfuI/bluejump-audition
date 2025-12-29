@@ -7,6 +7,7 @@ import { STREAMER_LIST } from '@/constants';
 import dayjs from '@/lib/dayjs';
 
 import LiveCard from './LiveCard';
+import MultiViewButton from './MultiViewButton';
 
 const Home = async () => {
   const stationInfoListPromise = STREAMER_LIST.map(
@@ -38,6 +39,7 @@ const Home = async () => {
           />
         ))}
       </Flex>
+      <MultiViewButton data={stationInfoList} />
     </ClientLayout>
   );
 };

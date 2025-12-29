@@ -39,7 +39,7 @@ const LiveCard = ({ stationData, broadData }: LiveCardProps) => {
             target="_blank"
           >
             <Image
-              alt={broadData?.broadTitle}
+              alt={broadData.broadTitle}
               draggable={false}
               height={270}
               loading="lazy"
@@ -83,7 +83,7 @@ const LiveCard = ({ stationData, broadData }: LiveCardProps) => {
           style={{ display: 'block', marginTop: 12, textAlign: 'end' }}
           type="warning"
         >
-          방송시작: {dayjs(broadData?.broadStart).format('L LTS')}
+          방송시작: {dayjs(broadData.broadStart).format('L LTS')}
         </Typography.Text>
       ) : null}
     </Card>
