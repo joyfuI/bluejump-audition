@@ -2,6 +2,7 @@
 import { Layout, Menu, Typography } from 'antd';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { Suspense } from 'react';
 
 export type ClientLayoutProps = { children: ReactNode; selectedKey: string };
 
@@ -28,7 +29,9 @@ const ClientLayout = ({ children, selectedKey }: ClientLayoutProps) => {
           theme="dark"
         />
       </Layout.Header>
-      <Layout.Content style={{ padding: 24 }}>{children}</Layout.Content>
+      <Layout.Content style={{ padding: 24 }}>
+        <Suspense>{children}</Suspense>
+      </Layout.Content>
     </Layout>
   );
 };
