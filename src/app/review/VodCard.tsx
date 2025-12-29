@@ -1,14 +1,27 @@
 'use client';
 import { Avatar, Badge, Card, Typography } from 'antd';
 import Image from 'next/image';
+import { parseAsArrayOf, parseAsString, useQueryState } from 'nuqs';
 
 import type { GetVodsReviewResponse } from '@/api/getVodsReview';
+import { STREAMER_LIST } from '@/constants';
 import dayjs from '@/lib/dayjs';
 import durationHumanize from '@/utils/durationHumanize';
 
 export type VodCardProps = { data: GetVodsReviewResponse['data'][0] };
 
 const VodCard = ({ data }: VodCardProps) => {
+  const [userId] = useQueryState(
+    'userId',
+    parseAsArrayOf(parseAsString).withDefault(
+      STREAMER_LIST.map((item) => item.id),
+    ),
+  );
+
+  if (!userId.includes(data.user_id)) {
+    return null;
+  }
+
   return (
     <Card
       cover={

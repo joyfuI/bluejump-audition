@@ -6,6 +6,7 @@ import ClientLayout from '@/components/ClientLayout';
 import { STREAMER_LIST } from '@/constants';
 import dayjs from '@/lib/dayjs';
 
+import FilterButton from './FilterButton';
 import VodCard from './VodCard';
 
 const Home = async () => {
@@ -35,6 +36,7 @@ const Home = async () => {
           <VodCard data={item} key={item.title_no} />
         ))}
       </Flex>
+      <FilterButton />
     </ClientLayout>
   );
 };

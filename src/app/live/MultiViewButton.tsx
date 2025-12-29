@@ -12,20 +12,20 @@ export type MultiViewButtonProps = {
 
 const MultiViewButton = ({ data }: MultiViewButtonProps) => {
   const [open, setOpen] = useState(false);
-  const [selection, setSelection] = useState<string[]>([]);
+  const [check, setCheck] = useState<string[]>([]);
 
   const handleClick = (userId: string) => {
-    let newSelection = [...selection];
-    if (selection.includes(userId)) {
-      newSelection = newSelection.filter((item) => item !== userId);
+    let newCheck = [...check];
+    if (check.includes(userId)) {
+      newCheck = newCheck.filter((item) => item !== userId);
     } else {
-      newSelection.push(userId);
+      newCheck.push(userId);
     }
-    setSelection(newSelection);
+    setCheck(newCheck);
   };
 
   const handleOk = () => {
-    window.open(`https://mul.live/${selection.join('/')}`, '_blank');
+    window.open(`https://mul.live/${check.join('/')}`, '_blank');
     setOpen(false);
   };
 
@@ -56,14 +56,14 @@ const MultiViewButton = ({ data }: MultiViewButtonProps) => {
                 icon={
                   <Badge
                     color="blue"
-                    count={selection.findIndex((id) => id === userId) + 1}
+                    count={check.indexOf(userId) + 1}
                     title=""
                   />
                 }
                 key={userId}
                 onClick={() => handleClick(userId)}
                 size="large"
-                type={selection.includes(userId) ? 'primary' : 'default'}
+                type={check.includes(userId) ? 'primary' : 'default'}
               >
                 {userNick}
                 {item[1]?.broadNo ? <Badge count="LIVE" title="" /> : null}
