@@ -28,9 +28,7 @@ const ClientLayout = ({ children, selectedKey }: ClientLayoutProps) => {
           theme="dark"
         />
       </Layout.Header>
-      <Layout.Content style={{ padding: '0 48px' }}>
-        <div style={{ padding: 24 }}>{children}</div>
-      </Layout.Content>
+      <Layout.Content style={{ padding: 24 }}>{children}</Layout.Content>
     </Layout>
   );
 };
