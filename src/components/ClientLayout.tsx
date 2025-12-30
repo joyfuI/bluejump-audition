@@ -1,4 +1,5 @@
 'use client';
+import { ExportOutlined } from '@ant-design/icons';
 import { Layout, Menu, Typography } from 'antd';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
@@ -10,6 +11,19 @@ const items = [
   { key: 'live', label: <Link href="/live">라이브 모아보기</Link> },
   { key: 'review', label: <Link href="/review">다시보기 모아보기</Link> },
   { key: 'calendar', label: <Link href="/calendar">캘린더 모아보기</Link> },
+  {
+    key: 'cafe',
+    label: (
+      <a
+        href="https://cafe.naver.com/bluejumpofficial"
+        rel="noreferrer"
+        target="_blank"
+      >
+        블루점프 팬카페
+        <ExportOutlined style={{ marginLeft: 4 }} />
+      </a>
+    ),
+  },
 ];
 
 const ClientLayout = ({ children, selectedKey }: ClientLayoutProps) => {
@@ -22,14 +36,14 @@ const ClientLayout = ({ children, selectedKey }: ClientLayoutProps) => {
           </Typography.Title>
         </Link>
         <Menu
-          defaultSelectedKeys={[selectedKey]}
           items={items}
           mode="horizontal"
+          selectedKeys={[selectedKey]}
           style={{ flex: 1, minWidth: 0 }}
           theme="dark"
         />
       </Layout.Header>
-      <Layout.Content style={{ padding: 24 }}>
+      <Layout.Content style={{ padding: '24px 24px 120px 24px' }}>
         <Suspense>{children}</Suspense>
       </Layout.Content>
     </Layout>
