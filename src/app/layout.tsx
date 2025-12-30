@@ -18,7 +18,10 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
     <html lang="ko">
       <body>
         <AntdRegistry>
-          <ConfigProvider locale={koKR}>
+          <ConfigProvider
+            locale={koKR}
+            theme={{ token: { colorPrimary: '#277ee8' } }}
+          >
             <NuqsAdapter>{children}</NuqsAdapter>
           </ConfigProvider>
         </AntdRegistry>
