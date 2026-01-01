@@ -27,6 +27,7 @@ const VodCard = ({ data }: VodCardProps) => {
       cover={
         <a
           href={`https://vod.sooplive.co.kr/player/${data.title_no}`}
+          rel="noreferrer"
           style={{ position: 'relative', overflow: 'hidden' }}
           target="_blank"
         >
@@ -37,6 +38,7 @@ const VodCard = ({ data }: VodCardProps) => {
             loading="lazy"
             src={`https:${data.ucc.thumb}`}
             style={{ display: 'block', width: '100%', height: 'auto' }}
+            unoptimized
             width={480}
           />
           <Badge
@@ -56,6 +58,7 @@ const VodCard = ({ data }: VodCardProps) => {
         description={
           <a
             href={`https://www.sooplive.co.kr/station/${data.user_id}`}
+            rel="noreferrer"
             style={{ color: 'inherit' }}
             target="_blank"
           >
@@ -65,6 +68,7 @@ const VodCard = ({ data }: VodCardProps) => {
         title={
           <a
             href={`https://vod.sooplive.co.kr/player/${data.title_no}`}
+            rel="noreferrer"
             style={{ color: 'inherit' }}
             target="_blank"
             title={data.title_name}

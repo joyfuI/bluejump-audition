@@ -26,15 +26,11 @@ const LiveCard = ({ stationData, broadData }: LiveCardProps) => {
 
   return (
     <Card
-      // actions={[
-      //   <Button key="aaa">aaa</Button>,
-      //   <Button key="bbb">bbb</Button>,
-      //   <Button key="ccc">ccc</Button>,
-      // ]}
       cover={
         broadData?.broadTitle ? (
           <a
             href={`https://play.sooplive.co.kr/${stationData.station.userId}`}
+            rel="noreferrer"
             style={{ overflow: 'hidden' }}
             target="_blank"
           >
@@ -71,6 +67,7 @@ const LiveCard = ({ stationData, broadData }: LiveCardProps) => {
         title={
           <a
             href={`https://www.sooplive.co.kr/station/${stationData.station.userId}`}
+            rel="noreferrer"
             style={{ color: 'inherit' }}
             target="_blank"
           >

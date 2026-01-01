@@ -8,13 +8,6 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'liveimg.sooplive.co.kr',
         port: '',
-        pathname: '/h/*.webp',
-      },
-      {
-        protocol: 'https',
-        hostname: 'videoimg.sooplive.co.kr',
-        port: '',
-        pathname: '/php/SnapshotLoad.php',
       },
     ],
   },
