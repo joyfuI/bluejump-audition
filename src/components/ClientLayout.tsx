@@ -11,8 +11,9 @@ const items = [
   { key: 'live', label: <Link href="/live">라이브 모아보기</Link> },
   { key: 'review', label: <Link href="/review">다시보기 모아보기</Link> },
   { key: 'calendar', label: <Link href="/calendar">캘린더 모아보기</Link> },
+  { key: 'cafe', label: <Link href="/cafe">스트리머 게시판</Link> },
   {
-    key: 'cafe',
+    key: 'bluejump',
     label: (
       <a
         href="https://cafe.naver.com/bluejumpofficial"

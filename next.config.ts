@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'liveimg.sooplive.co.kr',
+        hostname: 'cafeptthumb-phinf.pstatic.net',
         port: '',
       },
     ],
