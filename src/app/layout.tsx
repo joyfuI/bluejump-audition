@@ -1,5 +1,4 @@
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ConfigProvider } from 'antd';
 import koKR from 'antd/locale/ko_KR';
 import type { Metadata } from 'next';
@@ -25,7 +24,6 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
             <NuqsAdapter>{children}</NuqsAdapter>
           </ConfigProvider>
         </AntdRegistry>
-        <SpeedInsights />
       </body>
     </html>
   );
