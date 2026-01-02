@@ -24,14 +24,18 @@ const ArticleList = ({ data }: ArticleListProps) => {
       renderItem={(item) => (
         <List.Item
           extra={
-            <Image
-              alt={item.title}
-              draggable={false}
-              height={150}
-              src={item.thumb}
-              style={{ objectFit: 'cover' }}
-              width={150}
-            />
+            item.thumb ? (
+              <Image
+                alt={item.title}
+                draggable={false}
+                height={150}
+                src={item.thumb}
+                style={{ objectFit: 'cover' }}
+                width={150}
+              />
+            ) : (
+              <div style={{ width: 150, height: 150 }} />
+            )
           }
           key={item.key}
         >
@@ -47,7 +51,7 @@ const ArticleList = ({ data }: ArticleListProps) => {
         </List.Item>
       )}
       size="large"
-      style={{ maxWidth: 1280, justifySelf: 'center' }}
+      style={{ maxWidth: 1280, margin: '0 auto' }}
     />
   );
 };

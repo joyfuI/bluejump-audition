@@ -73,6 +73,7 @@ const ClientCalendar = ({ data }: ClientCalendarProps) => {
     <Calendar
       cellRender={cellRender}
       onChange={handleChange}
+      style={{ marginBottom: -96 }}
       value={dayjs(date, 'YYYY-MM-DD')}
     />
   );
