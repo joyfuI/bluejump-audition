@@ -43,7 +43,9 @@ const ClientLayout = ({
     let timer: NodeJS.Timeout;
     if (refreshDelay) {
       timer = setInterval(() => {
-        router.refresh();
+        if (!document.hidden) {
+          router.refresh();
+        }
       }, refreshDelay);
     }
     return () => {
