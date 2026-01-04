@@ -1,7 +1,7 @@
 import { Flex } from 'antd';
 
 import getHomeBroad from '@/api/getHomeBroad';
-import getStationInfo from '@/api/getStationInfo';
+import getStationInfo, { REVALIDATE } from '@/api/getStationInfo';
 import ClientLayout from '@/components/ClientLayout';
 import { STREAMER_LIST } from '@/constants';
 import dayjs from '@/lib/dayjs';
@@ -9,7 +9,7 @@ import dayjs from '@/lib/dayjs';
 import LiveCard from './LiveCard';
 import MultiViewButton from './MultiViewButton';
 
-const Home = async () => {
+const Page = async () => {
   const stationInfoListPromise = STREAMER_LIST.map(
     async (item) =>
       [await getStationInfo(item.id), await getHomeBroad(item.id)] as const,
@@ -29,7 +29,7 @@ const Home = async () => {
   );
 
   return (
-    <ClientLayout selectedKey="live">
+    <ClientLayout refreshDelay={REVALIDATE * 1000} selectedKey="live">
       <Flex gap="small" wrap>
         {stationInfoList.map((item) => (
           <LiveCard
@@ -44,4 +44,4 @@ const Home = async () => {
   );
 };
 
-export default Home;
+export default Page;

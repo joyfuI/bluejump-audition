@@ -1,10 +1,10 @@
-import getCafeArticles from '@/api/getCafeArticles';
+import getCafeArticles, { REVALIDATE } from '@/api/getCafeArticles';
 import ClientLayout from '@/components/ClientLayout';
 
 import type { ArticleListProps } from './ArticleList';
 import ArticleList from './ArticleList';
 
-const Home = async () => {
+const Page = async () => {
   const articleList = (await getCafeArticles()).result.articleList.map(
     (item) => item.item,
   );
@@ -20,10 +20,10 @@ const Home = async () => {
   }));
 
   return (
-    <ClientLayout selectedKey="cafe">
+    <ClientLayout refreshDelay={REVALIDATE * 1000} selectedKey="cafe">
       <ArticleList data={data} />
     </ClientLayout>
   );
 };
 
-export default Home;
+export default Page;

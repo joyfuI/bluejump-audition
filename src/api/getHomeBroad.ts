@@ -20,12 +20,15 @@ export type GetHomeBroadResponse = {
   autoHashTags: string[];
 };
 
+// 1분
+export const REVALIDATE = 60;
+
 const getHomeBroad = (userId: string) =>
   fetchJson<GetHomeBroadResponse>(
     `https://api-channel.sooplive.co.kr/v1.1/channel/${userId}/home/section/broad`,
     {
       cache: 'force-cache',
-      next: { revalidate: 60, tags: ['getHomeBroad', userId] },
+      next: { revalidate: REVALIDATE, tags: ['getHomeBroad', userId] },
     },
   ).catch(() => Promise.resolve(undefined));
 

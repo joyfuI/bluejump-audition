@@ -17,6 +17,9 @@ export type GetCalendarResponse = {
 
 export type GetCalendarParams = { year?: number; month?: number };
 
+// 1시간
+export const REVALIDATE = 3600;
+
 const getCalendar = (userId: string, params?: GetCalendarParams) => {
   const today = new Date();
   const year = params?.year ?? today.getFullYear();
@@ -26,7 +29,7 @@ const getCalendar = (userId: string, params?: GetCalendarParams) => {
     `https://api-channel.sooplive.co.kr/v1.1/channel/${userId}/calendar?view=month&year=${year}&month=${month}&userId=${userId}`,
     {
       cache: 'force-cache',
-      next: { revalidate: 3600, tags: ['getCalendar', userId] },
+      next: { revalidate: REVALIDATE, tags: ['getCalendar', userId] },
     },
   );
 };

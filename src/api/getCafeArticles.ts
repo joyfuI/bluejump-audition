@@ -60,6 +60,9 @@ export type GetCafeArticlesResponse = {
 
 export type GetCafeArticlesParams = { page?: number; pageSize?: number };
 
+// 10분
+export const REVALIDATE = 600;
+
 const getCafeArticles = (
   cafeId: number = 31345283,
   menuId: number = 43,
@@ -69,7 +72,7 @@ const getCafeArticles = (
     `https://apis.naver.com/cafe-web/cafe-boardlist-api/v1/cafes/${cafeId}/menus/${menuId}/articles?page=${params?.page ?? 1}&pageSize=${params?.pageSize ?? 100}&sortBy=TIME&viewType=C`,
     {
       cache: 'force-cache',
-      next: { revalidate: 600, tags: ['getCafeArticles'] },
+      next: { revalidate: REVALIDATE, tags: ['getCafeArticles'] },
     },
   );
 

@@ -75,12 +75,15 @@ export type GetStationInfoResponse = {
   }[];
 };
 
+// 1분
+export const REVALIDATE = 60;
+
 const getStationInfo = (userId: string) =>
   fetchJson<GetStationInfoResponse>(
     `https://api-channel.sooplive.co.kr/v1.1/channel/${userId}/station`,
     {
       cache: 'force-cache',
-      next: { revalidate: 60, tags: ['getStationInfo', userId] },
+      next: { revalidate: REVALIDATE, tags: ['getStationInfo', userId] },
     },
   );
 

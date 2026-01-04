@@ -1,7 +1,7 @@
 import { Alert, Flex } from 'antd';
 
 import type { GetVodsReviewResponse } from '@/api/getVodsReview';
-import getVodsReview from '@/api/getVodsReview';
+import getVodsReview, { REVALIDATE } from '@/api/getVodsReview';
 import ClientLayout from '@/components/ClientLayout';
 import { STREAMER_LIST } from '@/constants';
 import dayjs from '@/lib/dayjs';
@@ -9,7 +9,7 @@ import dayjs from '@/lib/dayjs';
 import FilterButton from './FilterButton';
 import VodCard from './VodCard';
 
-const Home = async () => {
+const Page = async () => {
   const vodsReviewListPromise = STREAMER_LIST.map((item) =>
     getVodsReview(item.id),
   );
@@ -25,7 +25,7 @@ const Home = async () => {
     });
 
   return (
-    <ClientLayout selectedKey="review">
+    <ClientLayout refreshDelay={REVALIDATE * 1000} selectedKey="review">
       <Alert
         style={{ marginBottom: 24 }}
         title="스트리머별 첫 번째 페이지만 불러옵니다."
@@ -41,4 +41,4 @@ const Home = async () => {
   );
 };
 
-export default Home;
+export default Page;

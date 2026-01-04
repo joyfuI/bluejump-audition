@@ -3,7 +3,7 @@ import type { SearchParams } from 'nuqs/server';
 import { createLoader, parseAsString } from 'nuqs/server';
 
 import type { GetCalendarResponse } from '@/api/getCalendar';
-import getCalendar from '@/api/getCalendar';
+import getCalendar, { REVALIDATE } from '@/api/getCalendar';
 import ClientLayout from '@/components/ClientLayout';
 import { STREAMER_LIST } from '@/constants';
 
@@ -16,7 +16,7 @@ const coordinatesSearchParams = {
 };
 const loadSearchParams = createLoader(coordinatesSearchParams);
 
-const Home = async ({ searchParams }: PageProps) => {
+const Page = async ({ searchParams }: PageProps) => {
   const { date } = await loadSearchParams(searchParams);
   const day = dayjs(date);
 
@@ -36,10 +36,10 @@ const Home = async ({ searchParams }: PageProps) => {
   );
 
   return (
-    <ClientLayout selectedKey="calendar">
+    <ClientLayout refreshDelay={REVALIDATE * 1000} selectedKey="calendar">
       <ClientCalendar data={calendarList} />
     </ClientLayout>
   );
 };
 
-export default Home;
+export default Page;

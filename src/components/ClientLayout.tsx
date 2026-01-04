@@ -2,10 +2,15 @@
 import { ExportOutlined } from '@ant-design/icons';
 import { Layout, Menu, Typography } from 'antd';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import type { ReactNode } from 'react';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 
-export type ClientLayoutProps = { children: ReactNode; selectedKey: string };
+export type ClientLayoutProps = {
+  children: ReactNode;
+  selectedKey: string;
+  refreshDelay?: number;
+};
 
 const items = [
   { key: 'live', label: <Link href="/live">라이브 모아보기</Link> },
@@ -27,7 +32,27 @@ const items = [
   },
 ];
 
-const ClientLayout = ({ children, selectedKey }: ClientLayoutProps) => {
+const ClientLayout = ({
+  children,
+  selectedKey,
+  refreshDelay,
+}: ClientLayoutProps) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (refreshDelay) {
+      timer = setInterval(() => {
+        router.refresh();
+      }, refreshDelay);
+    }
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, [refreshDelay, router]);
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Layout.Header style={{ display: 'flex', alignItems: 'center', gap: 48 }}>
