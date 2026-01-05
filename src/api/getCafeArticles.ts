@@ -70,10 +70,7 @@ const getCafeArticles = (
 ) =>
   fetchJson<GetCafeArticlesResponse>(
     `https://apis.naver.com/cafe-web/cafe-boardlist-api/v1/cafes/${cafeId}/menus/${menuId}/articles?page=${params?.page ?? 1}&pageSize=${params?.pageSize ?? 100}&sortBy=TIME&viewType=C`,
-    {
-      cache: 'force-cache',
-      next: { revalidate: REVALIDATE, tags: ['getCafeArticles'] },
-    },
+    { next: { revalidate: REVALIDATE, tags: ['getCafeArticles'] } },
   );
 
 export default getCafeArticles;

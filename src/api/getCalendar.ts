@@ -27,10 +27,7 @@ const getCalendar = (userId: string, params?: GetCalendarParams) => {
 
   return fetchJson<GetCalendarResponse>(
     `https://api-channel.sooplive.co.kr/v1.1/channel/${userId}/calendar?view=month&year=${year}&month=${month}&userId=${userId}`,
-    {
-      cache: 'force-cache',
-      next: { revalidate: REVALIDATE, tags: ['getCalendar', userId] },
-    },
+    { next: { revalidate: REVALIDATE, tags: ['getCalendar', userId] } },
   );
 };
 

@@ -26,10 +26,7 @@ export const REVALIDATE = 60;
 const getHomeBroad = (userId: string) =>
   fetchJson<GetHomeBroadResponse>(
     `https://api-channel.sooplive.co.kr/v1.1/channel/${userId}/home/section/broad`,
-    {
-      cache: 'force-cache',
-      next: { revalidate: REVALIDATE, tags: ['getHomeBroad', userId] },
-    },
+    { next: { revalidate: REVALIDATE, tags: ['getHomeBroad', userId] } },
   ).catch(() => Promise.resolve(undefined));
 
 export default getHomeBroad;
