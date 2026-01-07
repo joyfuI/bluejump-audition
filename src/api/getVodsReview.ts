@@ -90,8 +90,8 @@ export type GetVodsReviewResponse = {
 
 export type GetVodsReviewParams = { page?: number };
 
-// 10분
-export const REVALIDATE = 600;
+// 5분
+export const REVALIDATE = 300;
 
 const getVodsReview = (userId: string, params?: GetVodsReviewParams) =>
   fetchJson<GetVodsReviewResponse>(
