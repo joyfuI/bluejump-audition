@@ -37,12 +37,30 @@ const MultiViewButton = ({ data }: MultiViewButtonProps) => {
 
   return (
     <>
-      <Modal onCancel={handleCancel} onOk={handleOk} open={open} title="멀티뷰">
+      <Modal
+        onCancel={handleCancel}
+        onOk={handleOk}
+        open={open}
+        title="멀티뷰 (외부 서비스 이용)"
+      >
         <Alert
           style={{ marginBottom: 16 }}
           title={
             <>
               Mul.Live 서비스를 이용합니다.
+              <br />
+              <a
+                href={
+                  navigator.userAgent.includes('Firefox')
+                    ? 'https://addons.mozilla.org/ko/firefox/addon/mullive/'
+                    : 'https://chromewebstore.google.com/detail/mullive-plus/pahcphmhihleneomklgfbbneokhjiaim'
+                }
+                rel="noreferrer"
+                target="_blank"
+              >
+                Mul.Live Plus 확장프로그램
+              </a>
+              을 설치하면 채팅 등 로그인 기능을 사용할 수 있습니다.
               <br />숲 동시시청 제한은 최대 4개입니다.
             </>
           }
