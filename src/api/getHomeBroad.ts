@@ -27,6 +27,6 @@ const getHomeBroad = (userId: string) =>
   fetchJson<GetHomeBroadResponse>(
     `https://api-channel.sooplive.co.kr/v1.1/channel/${userId}/home/section/broad`,
     { next: { revalidate: REVALIDATE, tags: ['getHomeBroad', userId] } },
-  ).catch(() => Promise.resolve(undefined));
+  ).catch(() => Promise.resolve(null));
 
 export default getHomeBroad;

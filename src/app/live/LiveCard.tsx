@@ -9,33 +9,36 @@ import useInterval from '@/hooks/useInterval';
 import dayjs from '@/lib/dayjs';
 
 export type LiveCardProps = {
-  stationData: GetStationInfoResponse;
-  broadData?: GetHomeBroadResponse;
+  data: Partial<GetStationInfoResponse> & {
+    broad: GetHomeBroadResponse | null;
+  };
 };
 
-const LiveCard = ({ stationData, broadData }: LiveCardProps) => {
+const LiveCard = ({ data }: LiveCardProps) => {
   const [imageSrc, setImageSrc] = useState(
-    `https://liveimg.sooplive.co.kr/h/${broadData?.broadNo}.webp`,
+    `https://liveimg.sooplive.co.kr/h/${data.broad?.broadNo}.webp`,
   );
 
   useInterval(() => {
     setImageSrc(
-      `https://liveimg.sooplive.co.kr/h/${broadData?.broadNo}.webp?t=${Date.now()}`,
+      `https://liveimg.sooplive.co.kr/h/${data.broad?.broadNo}.webp?t=${Date.now()}`,
     );
   }, 10000);
 
   return (
     <Card
       cover={
-        broadData?.broadTitle ? (
+        data.station?.userId &&
+        data.broad?.broadTitle &&
+        data.broad?.broadNo ? (
           <a
-            href={`https://play.sooplive.co.kr/${stationData.station.userId}`}
+            href={`https://play.sooplive.co.kr/${data.station.userId}`}
             rel="noreferrer"
             style={{ overflow: 'hidden' }}
             target="_blank"
           >
             <Image
-              alt={broadData.broadTitle}
+              alt={data.broad.broadTitle}
               draggable={false}
               height={270}
               loading="lazy"
@@ -62,25 +65,25 @@ const LiveCard = ({ stationData, broadData }: LiveCardProps) => {
       }}
     >
       <Card.Meta
-        avatar={<Avatar src={stationData.station.profileImage} />}
-        description={broadData?.broadTitle ?? '방송 중이 아닙니다.'}
+        avatar={<Avatar src={data.station?.profileImage} />}
+        description={data.broad?.broadTitle ?? '방송 중이 아닙니다.'}
         title={
           <a
-            href={`https://www.sooplive.co.kr/station/${stationData.station.userId}`}
+            href={`https://www.sooplive.co.kr/station/${data.station?.userId ?? ''}`}
             rel="noreferrer"
             style={{ color: 'inherit' }}
             target="_blank"
           >
-            {stationData.station.userNick}
+            {data.station?.userNick}
           </a>
         }
       />
-      {broadData?.broadStart ? (
+      {data.broad?.broadStart ? (
         <Typography.Text
           style={{ display: 'block', marginTop: 12, textAlign: 'end' }}
           type="warning"
         >
-          방송시작: {dayjs(broadData.broadStart).format('L LTS')}
+          방송시작: {dayjs(data.broad.broadStart).format('L LTS')}
         </Typography.Text>
       ) : null}
     </Card>

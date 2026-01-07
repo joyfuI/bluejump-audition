@@ -7,7 +7,9 @@ import type { GetHomeBroadResponse } from '@/api/getHomeBroad';
 import type { GetStationInfoResponse } from '@/api/getStationInfo';
 
 export type MultiViewButtonProps = {
-  data: (readonly [GetStationInfoResponse, GetHomeBroadResponse | undefined])[];
+  data: (Partial<GetStationInfoResponse> & {
+    broad: GetHomeBroadResponse | null;
+  })[];
 };
 
 const MultiViewButton = ({ data }: MultiViewButtonProps) => {
@@ -47,26 +49,28 @@ const MultiViewButton = ({ data }: MultiViewButtonProps) => {
           type="info"
         />
         <Flex gap="small" vertical>
-          {data.map((item) => {
-            const { userId, userNick } = item[0].station;
-
+          {data.map((item, index) => {
             return (
               <Button
                 block
                 icon={
                   <Badge
                     color="blue"
-                    count={check.indexOf(userId) + 1}
+                    count={check.indexOf(item.station?.userId ?? '') + 1}
                     title=""
                   />
                 }
-                key={userId}
-                onClick={() => handleClick(userId)}
+                key={item.station?.userId ?? index}
+                onClick={() => handleClick(item.station?.userId ?? '')}
                 size="large"
-                type={check.includes(userId) ? 'primary' : 'default'}
+                type={
+                  check.includes(item.station?.userId ?? '')
+                    ? 'primary'
+                    : 'default'
+                }
               >
-                {userNick}
-                {item[1]?.broadNo ? <Badge count="LIVE" title="" /> : null}
+                {item.station?.userNick}
+                {item.broad?.broadNo ? <Badge count="LIVE" title="" /> : null}
               </Button>
             );
           })}

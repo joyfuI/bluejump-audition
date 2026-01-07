@@ -5,6 +5,8 @@ import type { Metadata } from 'next';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import type { ReactNode } from 'react';
 
+import Providers from '@/lib/queryClient';
+
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -21,7 +23,9 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
             locale={koKR}
             theme={{ token: { colorPrimary: '#277ee8' } }}
           >
-            <NuqsAdapter>{children}</NuqsAdapter>
+            <Providers>
+              <NuqsAdapter>{children}</NuqsAdapter>
+            </Providers>
           </ConfigProvider>
         </AntdRegistry>
       </body>
