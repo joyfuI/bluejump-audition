@@ -27,7 +27,9 @@ const getQueryClient = () => {
   }
 };
 
-const persister = createAsyncStoragePersister({ storage: window.localStorage });
+const persister = createAsyncStoragePersister({
+  storage: isServer ? undefined : window.localStorage,
+});
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   const queryClient = getQueryClient();
