@@ -1,7 +1,7 @@
 'use client';
 import { Avatar, Card, Empty, Typography } from 'antd';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { GetHomeBroadResponse } from '@/api/getHomeBroad';
 import type { GetStationInfoResponse } from '@/api/getStationInfo';
@@ -15,9 +15,11 @@ export type LiveCardProps = {
 };
 
 const LiveCard = ({ data }: LiveCardProps) => {
-  const [imageSrc, setImageSrc] = useState(
-    `https://liveimg.sooplive.co.kr/h/${data.broad?.broadNo}.webp`,
-  );
+  const [imageSrc, setImageSrc] = useState('');
+
+  useEffect(() => {
+    setImageSrc(`https://liveimg.sooplive.co.kr/h/${data.broad?.broadNo}.webp`);
+  }, [data.broad?.broadNo]);
 
   useInterval(() => {
     setImageSrc(
@@ -28,9 +30,7 @@ const LiveCard = ({ data }: LiveCardProps) => {
   return (
     <Card
       cover={
-        data.station?.userId &&
-        data.broad?.broadTitle &&
-        data.broad?.broadNo ? (
+        data.station?.userId && data.broad?.broadTitle && imageSrc ? (
           <a
             href={`https://play.sooplive.co.kr/${data.station.userId}`}
             rel="noreferrer"

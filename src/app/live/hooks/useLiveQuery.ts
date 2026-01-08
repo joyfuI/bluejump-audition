@@ -37,7 +37,7 @@ const useLiveQuery = () => {
         }))
         .filter(
           (_item, index) =>
-            results1[index].isFetched && results2[index].isFetched,
+            results1[index].isFetched && results2[index].isFetchedAfterMount,
         )
         .toArray()
         .toSorted((a, b) => {
