@@ -3,17 +3,13 @@ import type { CalendarProps } from 'antd';
 import { Badge, Calendar } from 'antd';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
-import { useRouter } from 'next/navigation';
 import { parseAsString, useQueryState } from 'nuqs';
 import { useMemo } from 'react';
 
 import type { GetCalendarResponse } from '@/api/getCalendar';
 import type { STREAMER_LIST } from '@/constants';
 
-export type ClientCalendarProps = {
-  data: (GetCalendarResponse['days'][0]['events'][0] &
-    (typeof STREAMER_LIST)[0])[];
-};
+import useCalendarQuery from './hooks/useCalendarQuery';
 
 const badgeColor = {
   방송시작: '#7f7fff',
@@ -22,19 +18,23 @@ const badgeColor = {
   기타: '#acb0b9',
 } as const;
 
-const ClientCalendar = ({ data }: ClientCalendarProps) => {
+const ClientCalendar = () => {
   const [date, setDate] = useQueryState(
     'date',
     parseAsString.withDefault(dayjs().format('YYYY-MM-DD')),
   );
+  const day = dayjs(date, 'YYYY-MM-DD');
 
-  const router = useRouter();
+  const { data } = useCalendarQuery({
+    year: day.year(),
+    month: day.month() + 1,
+  });
 
   const listData = useMemo(() => {
-    const map = Map.groupBy<string, ClientCalendarProps['data'][0]>(
-      data,
-      (item) => item.eventDate,
-    );
+    const map = Map.groupBy<
+      string,
+      GetCalendarResponse['days'][0]['events'][0] & (typeof STREAMER_LIST)[0]
+    >(data, (item) => item.eventDate);
     map.forEach((value, key, map) => {
       const newValue = value.toSorted((a, b) =>
         a.eventTime.localeCompare(b.eventTime),
@@ -64,9 +64,8 @@ const ClientCalendar = ({ data }: ClientCalendarProps) => {
     return info.originNode;
   };
 
-  const handleChange = async (day: Dayjs) => {
-    await setDate(dayjs(day).format('YYYY-MM-DD'));
-    router.refresh();
+  const handleChange = (day: Dayjs) => {
+    setDate(dayjs(day).format('YYYY-MM-DD'));
   };
 
   return (
@@ -74,7 +73,7 @@ const ClientCalendar = ({ data }: ClientCalendarProps) => {
       cellRender={cellRender}
       onChange={handleChange}
       style={{ marginBottom: -96 }}
-      value={dayjs(date, 'YYYY-MM-DD')}
+      value={day}
     />
   );
 };

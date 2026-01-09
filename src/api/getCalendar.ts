@@ -17,8 +17,8 @@ export type GetCalendarResponse = {
 
 export type GetCalendarParams = { year?: number; month?: number };
 
-// 1시간
-export const REVALIDATE = 3600;
+// 30분
+export const REVALIDATE = 1800;
 
 const getCalendar = (userId: string, params?: GetCalendarParams) => {
   const today = new Date();
