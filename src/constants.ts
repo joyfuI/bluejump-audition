@@ -7,3 +7,5 @@ export const STREAMER_LIST: readonly Streamer[] = [
   { id: 'yaguja00', nick: '야구자' },
   { id: 'denebeu', nick: '데네브' },
 ];
+
+export const PASS_LIST: readonly string[] = ['denebeu'];

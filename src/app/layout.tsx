@@ -7,6 +7,7 @@ import type { ReactNode } from 'react';
 
 import Providers from '@/lib/queryClient';
 
+import PassCongratsModal from './PassCongratsModal';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -24,7 +25,10 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
             theme={{ token: { colorPrimary: '#277ee8' } }}
           >
             <Providers>
-              <NuqsAdapter>{children}</NuqsAdapter>
+              <NuqsAdapter>
+                {children}
+                <PassCongratsModal />
+              </NuqsAdapter>
             </Providers>
           </ConfigProvider>
         </AntdRegistry>
